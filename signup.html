@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입 폼</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script>
+      $(function () {
+        $("#signup").submit(function (e) {
+          event.preventDefault();
+
+          var username = $("#name").val();
+          var email = $("#mail").val();
+          var password = $("#pw").val();
+          var confirm = $("#confirmpw").val();
+
+          $("#errorMessage").text("");
+
+          if (username === "") {
+            $("#nameError").text("이름을 입력해주세요").css({ color: "red" });
+            return;
+          } else if (username !== "") {
+            $("#nameError").text("");
+          }
+
+          if (email === "") {
+            $("#mailError").text("이메일을 입력해주세요").css({ color: "red" });
+            return;
+          } else if (email !== "") {
+            $("#mailError").text("");
+          }
+
+          if (password === "") {
+            $("#pwError").text("비밀번호를 입력해주세요").css({ color: "red" });
+          } else if (password !== "") {
+            $("#pwError").text("");
+          }
+
+          if (password !== confirm) {
+            $("#confirmError").text("비밀번호가 일치하지 않습니다").css({ color: "red" });
+            return;
+          } else if (confirm !== "") {
+            $("#confirmError").text("");
+          }
+          if (username !== "" && email !== "" && password !== "" && confirm !== "") {
+            $("#errorMessage").text("");
+            $("#infoMessage").html("<p>사용자 이름:" + username + "</p>" + "<p>이메일:" + email);
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="signupForm">
+      <h1>회원가입</h1>
+      <form id="signup">
+        <div>
+          <label for="name">이름</label>
+          <input type="text" name="name" id="name" />
+          <div class="error" id="nameError"></div>
+        </div>
+        <div>
+          <label for="mail">이메일</label>
+          <input type="email" name="mail" id="mail" />
+          <div class="error" id="mailError"></div>
+        </div>
+        <div>
+          <label for="pw">비밀번호 입력 </label>
+          <input type="password" name="pw" id="pw" />
+          <div class="error" id="pwError"></div>
+        </div>
+        <div>
+          <label for="confirmpw">비밀번호 확인</label>
+          <input type="password" name="confirmpw" id="confirmpw" />
+          <div class="error" id="confirmError"></div>
+        </div>
+        <button type="submit">회원가입</button>
+      </form>
+      <div class="error" id="errorMessage"></div>
+      <div class="info" id="infoMessage"></div>
+
+      <div></div>
+    </div>
+  </body>
+</html>
